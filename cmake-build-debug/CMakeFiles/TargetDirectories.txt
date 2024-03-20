@@ -1,0 +1,5 @@
+C:/Users/trish/CLionProjects/Logger/cmake-build-debug/CMakeFiles/Logger.dir
+C:/Users/trish/CLionProjects/Logger/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/trish/CLionProjects/Logger/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/trish/CLionProjects/Logger/cmake-build-debug/CMakeFiles/Logger_autogen_timestamp_deps.dir
+C:/Users/trish/CLionProjects/Logger/cmake-build-debug/CMakeFiles/Logger_autogen.dir
