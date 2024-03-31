@@ -1,12 +1,15 @@
 
 #include <QDateTime>
 #include "Logger.h"
+#include "iostream"
+#include "QFile"
+
 
 QSqlDatabase Logger::db;
 
-void Logger::init() {
+void Logger::init(QString path) {
     Logger::db = QSqlDatabase::addDatabase("QSQLITE");
-    Logger::db.setDatabaseName("C:\\Users\\trish\\Desktop\\db.db");
+    Logger::db.setDatabaseName(path);
 
     qInstallMessageHandler(Logger::customMessageHandler);
 }
@@ -54,6 +57,55 @@ void Logger::customMessageHandler(QtMsgType type, const QMessageLogContext &cont
 
     Logger::db.close();
 
+}
+
+void Logger::getLogByDate(QString path, QDateTime firstDate, QDateTime secondDate){
+    if (!Logger::db.open()){
+        qDebug() << "Open Error";
+    }
+
+    QFile logFile;
+    QSqlQuery query;
+    QString format = "yyyy-MM-dd HH:mm:ss";
+
+    logFile.setFileName(path);
+    logFile.open(QIODevice::Append | QIODevice::Text);
+    logFile.resize(0);
+
+//    '2024-03-31 22:56:00'
+
+    QString strInsert = "SELECT text_id, date_time,type_msg,msg\n"
+                        "FROM Log\n"
+                        "WHERE datetime(date_time) BETWEEN :dateFirst AND :dateSecond";
+
+    query.prepare(strInsert);
+    query.bindValue(":dateFirst",firstDate.toString(format));
+    query.bindValue(":dateSecond",secondDate.toString(format));
+
+    if (!query.exec()) {
+        qDebug() << "Eror get data";
+    }
+
+
+    while (query.next()){
+        QString log = QObject::tr("%1 | %2 | %3 | %4\n").
+                arg(query.value(0).toString()).
+                arg(query.value(1).toString()).
+                arg(query.value(2).toString()).
+                arg(query.value(3).toString());
+        logFile.write(log.toLocal8Bit());
+    }
+
+    logFile.close();
+    Logger::db.close();
+}
+
+void Logger::createError() {
+    try {
+        throw std::invalid_argument("Mess");
+    }catch (const std::exception& e){
+        qCritical() << "Ошибка при делении:" << e.what();
+    }
 }
 
 void Logger::close() {

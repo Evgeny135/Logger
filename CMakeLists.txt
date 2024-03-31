@@ -7,7 +7,7 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
 
-find_package(Qt6 COMPONENTS
+find_package(Qt5 COMPONENTS
         Core
         Gui
         Widgets
@@ -18,10 +18,10 @@ add_executable(Logger main.cpp
         Logger.cpp
         Logger.h)
 target_link_libraries(Logger
-        Qt::Core
-        Qt::Gui
-        Qt::Widgets
-        Qt::Sql
+        Qt5::Core
+        Qt5::Gui
+        Qt5::Widgets
+        Qt5::Sql
 )
 
 #if (WIN32 AND NOT DEFINED CMAKE_TOOLCHAIN_FILE)

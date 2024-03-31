@@ -8,14 +8,14 @@
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
 
-    Logger::init();
+    Logger::init("C:\\Users\\trish\\Desktop\\db.db");
 
-    qInfo("Info1");
-    qInfo("Info2");
-    qInfo("Info3");
-    qWarning("Warning");
-    qDebug("DBG");
-    qCritical("Crit");
+    QDateTime firstDate = QDateTime::fromString("2024-03-31 22:56:00", "yyyy-MM-dd hh:mm:ss");
+    QDateTime secondDate = QDateTime::fromString("2024-03-31 22:57:00", "yyyy-MM-dd hh:mm:ss");
+
+    Logger::getLogByDate("C:\\Users\\trish\\Desktop\\log.log", firstDate,secondDate);
+
+    Logger::createError();
 
     Logger::close();
 
