@@ -10,6 +10,17 @@ QSqlDatabase Logger::db;
 void Logger::init(QString path) {
     Logger::db = QSqlDatabase::addDatabase("QSQLITE");
     Logger::db.setDatabaseName(path);
+    if (!Logger::db.open()){
+        qDebug() << "Open Error";
+    }
+
+    QSqlQuery query("CREATE TABLE IF NOT EXISTS Log (id INTEGER PRIMARY KEY AUTOINCREMENT,text_id TEXT,date_time TEXT,type_msg TEXT,msg TEXT)");
+
+    if (!query.exec()) {
+        qDebug() << "Eror with add";
+    }
+
+    Logger::db.close();
 
     qInstallMessageHandler(Logger::customMessageHandler);
 }
