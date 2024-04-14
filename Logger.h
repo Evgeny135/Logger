@@ -12,6 +12,9 @@ public:
     static void customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg);
     static void createError();
     static void close();
+    static void openDb();
+    static void addRecord(QString textId, QString type, QString message);
+
 private:
     static QSqlDatabase db;
 

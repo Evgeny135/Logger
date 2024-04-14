@@ -140,7 +140,7 @@ build Logger_autogen/timestamp Logger_autogen/mocs_compilation.cpp | ${cmake_nin
 #############################################
 # Phony custom command for CMakeFiles\Logger_autogen_timestamp_deps
 
-build CMakeFiles/Logger_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/Logger_autogen_timestamp_deps: phony D$:/Qt55/5.15.1/mingw81_64/bin/uic.exe D$:/Qt55/5.15.1/mingw81_64/bin/moc.exe D$:/Qt55/5.15.1/mingw81_64/lib/libQt5Core.a D$:/Qt55/5.15.1/mingw81_64/lib/libQt5Sql.a D$:/Qt55/5.15.1/mingw81_64/lib/libQt5Gui.a D$:/Qt55/5.15.1/mingw81_64/lib/libQt5Widgets.a
+build CMakeFiles/Logger_autogen_timestamp_deps | ${cmake_ninja_workdir}CMakeFiles/Logger_autogen_timestamp_deps: phony D$:/Qt55/5.15.1/mingw81_64/lib/libQt5Widgets.a D$:/Qt55/5.15.1/mingw81_64/lib/libQt5Core.a D$:/Qt55/5.15.1/mingw81_64/bin/moc.exe D$:/Qt55/5.15.1/mingw81_64/lib/libQt5Gui.a D$:/Qt55/5.15.1/mingw81_64/bin/uic.exe D$:/Qt55/5.15.1/mingw81_64/lib/libQt5Sql.a
 
 
 #############################################

@@ -16,7 +16,8 @@ find_package(Qt5 COMPONENTS
 
 add_executable(Logger main.cpp
         Logger.cpp
-        Logger.h)
+        Logger.h
+        MainWindow.h)
 target_link_libraries(Logger
         Qt5::Core
         Qt5::Gui

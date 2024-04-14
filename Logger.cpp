@@ -7,6 +7,12 @@
 
 QSqlDatabase Logger::db;
 
+void Logger::openDb(){
+    if (!Logger::db.open()){
+        qDebug() << "Open Error";
+    }
+}
+
 void Logger::init(QString path) {
     Logger::db = QSqlDatabase::addDatabase("QSQLITE");
     Logger::db.setDatabaseName(path);
@@ -29,7 +35,6 @@ void Logger::customMessageHandler(QtMsgType type, const QMessageLogContext &cont
     if (!Logger::db.open()){
         qDebug() << "Open Error";
     }
-
 
     QSqlQuery query;
     QString typeMsg;
@@ -68,6 +73,30 @@ void Logger::customMessageHandler(QtMsgType type, const QMessageLogContext &cont
 
     Logger::db.close();
 
+}
+
+void Logger::addRecord(QString textId, QString type, QString message){
+    if (!Logger::db.open()){
+        qDebug() << "Open Error";
+    }
+
+    QSqlQuery query;
+
+    QString strInsert = "INSERT INTO Log(text_id,date_time,type_msg,msg) VALUES (:text_id,:date_time,:type_msg,:msg)";
+
+    QString dateTime = QDateTime::currentDateTime().toString("yyyy-MM-dd hh:mm:ss");
+
+    query.prepare(strInsert);
+    query.bindValue(":text_id",textId);
+    query.bindValue(":date_time",dateTime);
+    query.bindValue(":type_msg",type);
+    query.bindValue(":msg",message);
+
+    if (!query.exec()) {
+        qDebug() << "Eror with add";
+    }
+
+    Logger::db.close();
 }
 
 void Logger::getLogByDate(QString path, QDateTime firstDate, QDateTime secondDate){
