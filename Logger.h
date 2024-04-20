@@ -14,6 +14,7 @@ public:
     static void close();
     static void openDb();
     static void addRecord(QString textId, QString type, QString message);
+    static void getLogByDateWithFilters(QString path, QString filters);
 
 private:
     static QSqlDatabase db;
