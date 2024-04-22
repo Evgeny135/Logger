@@ -326,6 +326,7 @@ C:/Users/trish/CLionProjects/Logger/MainWindow.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QDialogButtonBox
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QHeaderView
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QInputDialog
+ mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QLabel
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QLineEdit
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QMainWindow
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QPushButton
@@ -347,6 +348,7 @@ C:/Users/trish/CLionProjects/Logger/MainWindow.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qgridlayout.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qheaderview.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qinputdialog.h
+ mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qlabel.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qlayout.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qlayoutitem.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qlineedit.h

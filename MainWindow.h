@@ -162,11 +162,11 @@ private slots:
             QVBoxLayout layout(&dialog);
 
             QComboBox comboBox;
-            comboBox.addItem("CRT");
-            comboBox.addItem("WRN");
-            comboBox.addItem("INF");
-            comboBox.addItem("DBG");
-            comboBox.addItem("FTL");
+            comboBox.addItem("Критическая");
+            comboBox.addItem("Предупреждение");
+            comboBox.addItem("Информационное");
+            comboBox.addItem("Отладочное");
+            comboBox.addItem("Фатальная");
 
             layout.addWidget(&comboBox);
 

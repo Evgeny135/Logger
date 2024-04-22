@@ -352,6 +352,7 @@ Logger_autogen/timestamp: \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QDialogButtonBox \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QHeaderView \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QInputDialog \
+  D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QLabel \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QLineEdit \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QMainWindow \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QPushButton \
@@ -373,6 +374,7 @@ Logger_autogen/timestamp: \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qgridlayout.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qheaderview.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qinputdialog.h \
+  D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qlabel.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qlayout.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qlayoutitem.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qlineedit.h \
