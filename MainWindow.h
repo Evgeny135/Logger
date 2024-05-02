@@ -13,6 +13,8 @@
 #include <QInputDialog>
 #include <QComboBox>
 #include <QLabel>
+#include <QDateTimeEdit>
+#include <QFileDialog>
 #include "QDateTime"
 #include "iostream"
 #include "Logger.h"
@@ -22,7 +24,7 @@ class MainWindow : public QMainWindow {
 Q_OBJECT
 public:
     MainWindow() {
-        this->setMinimumSize(800,600);
+        this->setMinimumSize(800, 600);
         QWidget *centralWidget = new QWidget;
         QVBoxLayout *layout = new QVBoxLayout(centralWidget);
 
@@ -38,8 +40,9 @@ public:
         comboBox->addItem("Информационное");
         comboBox->addItem("Отладочное");
         comboBox->addItem("Фатальная");
+        comboBox->setEditable(true);
 
-        QLabel *labelMessage = new QLabel("Тип сообщения:");
+        QLabel *labelMessage = new QLabel("Сообщение:");
 
         message = new QLineEdit;
 
@@ -72,13 +75,13 @@ public:
         view->setModel(model);
 
         connect(view->horizontalHeader(), &QHeaderView::sectionClicked, this, &MainWindow::onHeaderClicked);
-        connect(button,&QPushButton::clicked, this,&MainWindow::buttonClick);
-        connect(buttonRefresh,&QPushButton::clicked,this,&MainWindow::refreshFilter);
-        connect(buttonSave,&QPushButton::clicked,this,&MainWindow::buttonSave);
+        connect(button, &QPushButton::clicked, this, &MainWindow::buttonClick);
+        connect(buttonRefresh, &QPushButton::clicked, this, &MainWindow::refreshFilter);
+        connect(buttonSave, &QPushButton::clicked, this, &MainWindow::buttonSave);
 
         textFilters = new QLabel;
 
-        textFilters->setText(filterText);
+        textFilters->setText("");
 
         layout->addWidget(textFilters);
 
@@ -86,82 +89,98 @@ public:
     }
 
 private slots:
-    void refreshFilter(){
-        Logger::openDb();
-        filter = "";
-        filterText = "";
-        textFilters->setText(filterText);
-        model->setFilter(filter);
-        model->select();
-};
-    void buttonClick(){
 
-        Logger::addRecord(textIdentifier->text(),comboBox->currentText(),message->text());
+    void refreshFilter() {
+        Logger::openDb();
+        filter[0] = "";
+        filter[1] = "";
+        filter[2] = "";
+        filterText[0] = "";
+        filterText[1] = "";
+        filterText[2] = "";
+        textFilters->setText("");
+        model->setFilter("");
+        model->select();
+    };
+
+    void buttonClick() {
+
+        Logger::addRecord(textIdentifier->text(), comboBox->currentText(), message->text());
         Logger::openDb();
         model->select();
-};
+    };
 
-    void buttonSave(){
-        Logger::getLogByDateWithFilters("C:\\Users\\trish\\Desktop\\log.log",filter.toUtf8().constData());
+    void buttonSave() {
+        QString filePath = QFileDialog::getSaveFileName(this, tr("Сохранить файл"), "C:/Users/trish/Desktop/log.log", tr("Лог-файлы (*.log);;Все файлы (*)"));
+        if (!filePath.isEmpty()) {
+            Logger::getLogByDateWithFilters(filePath.toUtf8().constData(), (filter[0] + filter[1] + filter[2]).toUtf8().constData());
+        }
+
+//        Logger::getLogByDateWithFilters("C:\\Users\\trish\\Desktop\\log.log",
+//                                        (filter[0] + filter[1] + filter[2]).toUtf8().constData());
     };
 
     void onHeaderClicked(int column) {
         Logger::openDb();
-        if (column==1){
+        if (column == 1) {
 
             bool ok;
 
-            QString text = QInputDialog::getText(this, tr("Фильтр по идентификатору"), tr("Введите идентификатор"), QLineEdit::Normal, "", &ok);
+            QString text = QInputDialog::getText(this, tr("Фильтр по идентификатору"), tr("Введите идентификатор"),
+                                                 QLineEdit::Normal, "", &ok);
             if (ok && !text.isEmpty()) {
             } else {
                 return;
             }
 
-            if (!filter.isEmpty()) filter+= QString(" AND ");
-
-            filter += QString("text_id = '%1'")
+            filter[0] = QString("text_id = '%1'")
                     .arg(text);
 
-            filterText += "Текстовый идентификатор "+text;
+            filterText[0] = "Текстовый идентификатор " + text;
 
-            model->setFilter(filter);
+            model->setFilter(getFilterString());
             model->select();
-        }else if (column == 2) {
-            QDateTime startDate = QDateTime::currentDateTime();
-            QDateTime endDate = QDateTime::currentDateTime();
+        } else if (column == 2) {
+            QDialog dialog(this);
+            QVBoxLayout layout(&dialog);
 
+            QDateTimeEdit startDateEdit;
+            startDateEdit.setDateTime(QDateTime::currentDateTime());
 
-            bool ok;
-            QString text = QInputDialog::getText(this, tr("Фильтр дат"), tr("Введите начальную дату (yyyy-MM-dd hh:mm:ss):"), QLineEdit::Normal, "", &ok);
-            if (ok && !text.isEmpty()) {
-                startDate = QDateTime::fromString(text, "yyyy-MM-dd hh:mm:ss");
-            } else {
-                return;
+            QDateTimeEdit endDateEdit;
+            endDateEdit.setDateTime(QDateTime::currentDateTime());
+
+            layout.addWidget(new QLabel("Начальная дата и время:"));
+            layout.addWidget(&startDateEdit);
+            layout.addWidget(new QLabel("Конечная дата и время:"));
+            layout.addWidget(&endDateEdit);
+
+            QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, Qt::Horizontal, &dialog);
+            layout.addWidget(&buttonBox);
+
+            connect(&buttonBox, &QDialogButtonBox::accepted, &dialog, &QDialog::accept);
+            connect(&buttonBox, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
+
+            if (dialog.exec() == QDialog::Accepted) {
+                QDateTime startDate = startDateEdit.dateTime();
+                QDateTime endDate = endDateEdit.dateTime();
+
+                filter[1] = QString("datetime(date_time) BETWEEN '%1' AND '%2'")
+                        .arg(startDate.toString("yyyy-MM-dd hh:mm:ss"))
+                        .arg(endDate.toString("yyyy-MM-dd hh:mm:ss"));
+
+                filterText[1] = " Даты:  " + startDate.toString("yyyy-MM-dd hh:mm:ss") + " " +
+                                endDate.toString("yyyy-MM-dd hh:mm:ss");
+
+                model->setFilter(getFilterString());
+                model->select();
             }
-
-
-            text = QInputDialog::getText(this, tr("Фильтр дат"), tr("Введите конечную дату (yyyy-MM-dd hh:mm:ss):"), QLineEdit::Normal, "", &ok);
-            if (ok && !text.isEmpty()) {
-                endDate = QDateTime::fromString(text, "yyyy-MM-dd hh:mm:ss");
-            } else {
-                return;
-            }
-
-            if (!filter.isEmpty()) filter+= QString(" AND ");
-
-            filter += QString("datetime(date_time) BETWEEN '%1' AND '%2'")
-                    .arg(startDate.toString("yyyy-MM-dd hh:mm:ss"))
-                    .arg(endDate.toString("yyyy-MM-dd hh:mm:ss"));
-
-            filterText += " Даты:  "+startDate.toString("yyyy-MM-dd hh:mm:ss") + " " + endDate.toString("yyyy-MM-dd hh:mm:ss");
-
-            model->setFilter(filter);
-            model->select();
-        }else if (column==3){
+        } else if (column == 3) {
             QDialog dialog(this);
             QVBoxLayout layout(&dialog);
 
             QComboBox comboBox;
+            comboBox.setEditable(true);
             comboBox.addItem("Критическая");
             comboBox.addItem("Предупреждение");
             comboBox.addItem("Информационное");
@@ -173,7 +192,6 @@ private slots:
             QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, Qt::Horizontal, &dialog);
             layout.addWidget(&buttonBox);
 
-
             connect(&buttonBox, &QDialogButtonBox::accepted, &dialog, &QDialog::accept);
             connect(&buttonBox, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
 
@@ -181,27 +199,40 @@ private slots:
             if (dialog.exec() == QDialog::Accepted) {
 
                 QString selectedValue = comboBox.currentText();
-                if (!filter.isEmpty()) filter+= QString(" AND ");
-                filter += QString("type_msg = '%1'").arg(selectedValue);
 
-                filterText += " Тип: " + selectedValue;
+                filter[2] = QString("type_msg = '%1'").arg(selectedValue);
 
-                model->setFilter(filter);
+                filterText[2] = " Тип: " + selectedValue;
+
+                model->setFilter(getFilterString());
+
                 model->select();
             }
         }
 
-        textFilters->setText(filterText);
+        textFilters->setText(filterText[0] + " " + filterText[1] + " " + filterText[2]);
     }
 
 private:
-    QString filter;
     QSqlTableModel *model;
     QLineEdit *textIdentifier;
-    QComboBox* comboBox;
+    QComboBox *comboBox;
     QLineEdit *message;
-    QString filterText = "";
+    QString filter[3] = {"", "", ""};
+    QString filterText[3];
     QLabel *textFilters;
+
+    QString getFilterString() {
+        QString composedFilter;
+        for (int i = 0; i < 3; ++i) {
+            if (!filter[i].isEmpty()) {
+                if (!composedFilter.isEmpty())
+                    composedFilter += " AND ";
+                composedFilter += filter[i];
+            }
+        }
+        return composedFilter;
+    };
 };
 
 

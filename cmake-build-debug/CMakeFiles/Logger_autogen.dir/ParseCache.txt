@@ -220,6 +220,7 @@ C:/Users/trish/CLionProjects/Logger/MainWindow.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qbasicatomic.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qbytearray.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qbytearraylist.h
+ mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qcalendar.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qchar.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qcompilerdetection.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qconfig.h
@@ -231,7 +232,11 @@ C:/Users/trish/CLionProjects/Logger/MainWindow.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qdatastream.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qdatetime.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qdebug.h
+ mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qdir.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qeventloop.h
+ mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qfile.h
+ mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qfiledevice.h
+ mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qfileinfo.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qflags.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qgenericatomic.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qglobal.h
@@ -278,6 +283,7 @@ C:/Users/trish/CLionProjects/Logger/MainWindow.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qtcore-config.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qtextstream.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qtypeinfo.h
+ mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qurl.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qvariant.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qvarlengtharray.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtCore/qvector.h
@@ -323,7 +329,9 @@ C:/Users/trish/CLionProjects/Logger/MainWindow.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtSql/qtsqlglobal.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QApplication
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QComboBox
+ mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QDateTimeEdit
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QDialogButtonBox
+ mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QFileDialog
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QHeaderView
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QInputDialog
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QLabel
@@ -342,8 +350,10 @@ C:/Users/trish/CLionProjects/Logger/MainWindow.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qapplication.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qboxlayout.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qcombobox.h
+ mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qdatetimeedit.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qdialog.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qdialogbuttonbox.h
+ mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qfiledialog.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qframe.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qgridlayout.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qheaderview.h

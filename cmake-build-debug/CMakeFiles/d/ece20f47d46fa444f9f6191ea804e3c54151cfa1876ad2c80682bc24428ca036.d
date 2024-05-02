@@ -246,6 +246,7 @@ Logger_autogen/timestamp: \
   D:/Qt55/5.15.1/mingw81_64/include/QtCore/qbasicatomic.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtCore/qbytearray.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtCore/qbytearraylist.h \
+  D:/Qt55/5.15.1/mingw81_64/include/QtCore/qcalendar.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtCore/qchar.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtCore/qcompilerdetection.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtCore/qconfig.h \
@@ -257,7 +258,11 @@ Logger_autogen/timestamp: \
   D:/Qt55/5.15.1/mingw81_64/include/QtCore/qdatastream.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtCore/qdatetime.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtCore/qdebug.h \
+  D:/Qt55/5.15.1/mingw81_64/include/QtCore/qdir.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtCore/qeventloop.h \
+  D:/Qt55/5.15.1/mingw81_64/include/QtCore/qfile.h \
+  D:/Qt55/5.15.1/mingw81_64/include/QtCore/qfiledevice.h \
+  D:/Qt55/5.15.1/mingw81_64/include/QtCore/qfileinfo.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtCore/qflags.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtCore/qgenericatomic.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtCore/qglobal.h \
@@ -304,6 +309,7 @@ Logger_autogen/timestamp: \
   D:/Qt55/5.15.1/mingw81_64/include/QtCore/qtcore-config.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtCore/qtextstream.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtCore/qtypeinfo.h \
+  D:/Qt55/5.15.1/mingw81_64/include/QtCore/qurl.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtCore/qvariant.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtCore/qvarlengtharray.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtCore/qvector.h \
@@ -349,7 +355,9 @@ Logger_autogen/timestamp: \
   D:/Qt55/5.15.1/mingw81_64/include/QtSql/qtsqlglobal.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QApplication \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QComboBox \
+  D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QDateTimeEdit \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QDialogButtonBox \
+  D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QFileDialog \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QHeaderView \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QInputDialog \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QLabel \
@@ -368,8 +376,10 @@ Logger_autogen/timestamp: \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qapplication.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qboxlayout.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qcombobox.h \
+  D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qdatetimeedit.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qdialog.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qdialogbuttonbox.h \
+  D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qfiledialog.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qframe.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qgridlayout.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qheaderview.h \
