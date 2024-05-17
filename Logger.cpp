@@ -32,6 +32,22 @@ void Logger::init(QString path) {
     qInstallMessageHandler(Logger::customMessageHandler);
 }
 
+void Logger::setPath(QString path){
+    Logger::db.setDatabaseName(path);
+    if (!Logger::db.open()) {
+        qDebug() << "Open Error";
+    }
+
+    QSqlQuery query(
+            "CREATE TABLE IF NOT EXISTS Log (id INTEGER PRIMARY KEY AUTOINCREMENT,text_id TEXT,date_time TEXT,type_msg TEXT,msg TEXT)");
+
+    if (!query.exec()) {
+        qDebug() << "Eror with add";
+    }
+
+    Logger::db.close();
+}
+
 void Logger::customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg) {
     if (!Logger::db.open()) {
         qDebug() << "Open Error";

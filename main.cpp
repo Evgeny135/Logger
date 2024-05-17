@@ -19,14 +19,6 @@ int main(int argc, char *argv[]) {
 
     MainWindow mainWindow;
     mainWindow.show();
-
-//    QDateTime firstDate = QDateTime::fromString("2024-03-31 22:56:00", "yyyy-MM-dd hh:mm:ss");
-//    QDateTime secondDate = QDateTime::fromString("2024-03-31 22:57:00", "yyyy-MM-dd hh:mm:ss");
-//
-//    Logger::getLogByDate("C:\\Users\\trish\\Desktop\\log.log", firstDate,secondDate);
-//
-//    Logger::createError();
-//
     Logger::close();
 
     return QApplication::exec();

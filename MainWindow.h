@@ -2,6 +2,7 @@
 #define LOGGER_MAINWINDOW_H
 
 #include <QApplication>
+#include <QAction>
 #include <QMainWindow>
 #include <QWidget>
 #include <QVBoxLayout>
@@ -15,10 +16,12 @@
 #include <QLabel>
 #include <QDateTimeEdit>
 #include <QFileDialog>
+#include <QMessageBox>
 #include "QDateTime"
 #include "iostream"
 #include "Logger.h"
 #include "QDialogButtonBox"
+#include "QToolBar"
 
 class MainWindow : public QMainWindow {
 Q_OBJECT
@@ -86,6 +89,7 @@ public:
         layout->addWidget(textFilters);
 
         setCentralWidget(centralWidget);
+
     }
 
 private slots:
@@ -115,31 +119,54 @@ private slots:
         if (!filePath.isEmpty()) {
             Logger::getLogByDateWithFilters(filePath.toUtf8().constData(), (filter[0] + filter[1] + filter[2]).toUtf8().constData());
         }
-
-//        Logger::getLogByDateWithFilters("C:\\Users\\trish\\Desktop\\log.log",
-//                                        (filter[0] + filter[1] + filter[2]).toUtf8().constData());
     };
 
     void onHeaderClicked(int column) {
         Logger::openDb();
         if (column == 1) {
+            QDialog dialog(this);
+            QVBoxLayout layout(&dialog);
 
-            bool ok;
+            QLineEdit inputText;
+            layout.addWidget(new QLabel("Введите идентификатор:"));
+            layout.addWidget(&inputText);
 
-            QString text = QInputDialog::getText(this, tr("Фильтр по идентификатору"), tr("Введите идентификатор"),
-                                                 QLineEdit::Normal, "", &ok);
-            if (ok && !text.isEmpty()) {
-            } else {
-                return;
+            QDialogButtonBox buttonBox(QDialogButtonBox::NoButton, Qt::Horizontal, &dialog);
+            QPushButton *addButton = buttonBox.addButton("Добавить", QDialogButtonBox::ActionRole);
+            QPushButton *editButton = buttonBox.addButton("Изменить", QDialogButtonBox::ActionRole);
+            QPushButton *cancelButton = buttonBox.addButton(QDialogButtonBox::Cancel);
+
+            layout.addWidget(&buttonBox);
+
+            connect(addButton, &QPushButton::clicked, [&]() {
+                QString text = inputText.text();
+                if (!text.isEmpty()) {
+                    if (!filter[0].isEmpty()) {
+                        filter[0] += QString(" OR text_id = '%1'").arg(text);
+                        filterText[0] += " , " + text;
+                    } else {
+                        filter[0] = QString("text_id = '%1'").arg(text);
+                        filterText[0] = "Текстовый идентификатор " + text;
+                    }
+                }
+                dialog.accept();
+            });
+
+            connect(editButton, &QPushButton::clicked, [&]() {
+                QString text = inputText.text();
+                if (!text.isEmpty()) {
+                    filter[0] = QString("text_id = '%1'").arg(text);
+                    filterText[0] = "Текстовый идентификатор " + text;
+                }
+                dialog.accept();
+            });
+
+            connect(cancelButton, &QPushButton::clicked, &dialog, &QDialog::reject);
+
+            if (dialog.exec() == QDialog::Accepted) {
+                model->setFilter(getFilterString());
+                model->select();
             }
-
-            filter[0] = QString("text_id = '%1'")
-                    .arg(text);
-
-            filterText[0] = "Текстовый идентификатор " + text;
-
-            model->setFilter(getFilterString());
-            model->select();
         } else if (column == 2) {
             QDialog dialog(this);
             QVBoxLayout layout(&dialog);
@@ -155,23 +182,45 @@ private slots:
             layout.addWidget(new QLabel("Конечная дата и время:"));
             layout.addWidget(&endDateEdit);
 
-            QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, Qt::Horizontal, &dialog);
+            QDialogButtonBox buttonBox(QDialogButtonBox::NoButton, Qt::Horizontal, &dialog);
+            QPushButton *addButton = buttonBox.addButton("Добавить", QDialogButtonBox::ActionRole);
+            QPushButton *editButton = buttonBox.addButton("Изменить", QDialogButtonBox::ActionRole);
+            QPushButton *cancelButton = buttonBox.addButton(QDialogButtonBox::Cancel);
+
             layout.addWidget(&buttonBox);
 
-            connect(&buttonBox, &QDialogButtonBox::accepted, &dialog, &QDialog::accept);
-            connect(&buttonBox, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
-
-            if (dialog.exec() == QDialog::Accepted) {
+            connect(addButton, &QPushButton::clicked, [&]() {
                 QDateTime startDate = startDateEdit.dateTime();
                 QDateTime endDate = endDateEdit.dateTime();
+                QString filterString = QString("datetime(date_time) BETWEEN '%1' AND '%2'")
+                        .arg(startDate.toString("yyyy-MM-dd hh:mm:ss"))
+                        .arg(endDate.toString("yyyy-MM-dd hh:mm:ss"));
+                if (!filter[1].isEmpty()) {
+                    filter[1] += " OR " + filterString;
+                    filterText[1] += " , " + startDate.toString("yyyy-MM-dd hh:mm:ss") + " " +
+                                    endDate.toString("yyyy-MM-dd hh:mm:ss");
+                } else {
+                    filter[1] = filterString;
+                    filterText[1] = " Даты:  " + startDate.toString("yyyy-MM-dd hh:mm:ss") + " " +
+                                endDate.toString("yyyy-MM-dd hh:mm:ss");
+                }
+                dialog.accept();
+            });
 
+            connect(editButton, &QPushButton::clicked, [&]() {
+                QDateTime startDate = startDateEdit.dateTime();
+                QDateTime endDate = endDateEdit.dateTime();
                 filter[1] = QString("datetime(date_time) BETWEEN '%1' AND '%2'")
                         .arg(startDate.toString("yyyy-MM-dd hh:mm:ss"))
                         .arg(endDate.toString("yyyy-MM-dd hh:mm:ss"));
-
                 filterText[1] = " Даты:  " + startDate.toString("yyyy-MM-dd hh:mm:ss") + " " +
                                 endDate.toString("yyyy-MM-dd hh:mm:ss");
+                dialog.accept();
+            });
 
+            connect(cancelButton, &QPushButton::clicked, &dialog, &QDialog::reject);
+
+            if (dialog.exec() == QDialog::Accepted) {
                 model->setFilter(getFilterString());
                 model->select();
             }
@@ -189,23 +238,40 @@ private slots:
 
             layout.addWidget(&comboBox);
 
-            QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, Qt::Horizontal, &dialog);
+            QDialogButtonBox buttonBox(QDialogButtonBox::NoButton, Qt::Horizontal, &dialog);
+            QPushButton *addButton = buttonBox.addButton("Добавить", QDialogButtonBox::ActionRole);
+            QPushButton *editButton = buttonBox.addButton("Изменить", QDialogButtonBox::ActionRole);
+            QPushButton *cancelButton = buttonBox.addButton(QDialogButtonBox::Cancel);
+
             layout.addWidget(&buttonBox);
 
-            connect(&buttonBox, &QDialogButtonBox::accepted, &dialog, &QDialog::accept);
-            connect(&buttonBox, &QDialogButtonBox::rejected, &dialog, &QDialog::reject);
+            connect(addButton, &QPushButton::clicked, [&]() {
+                QString selectedValue = comboBox.currentText();
+                if (!selectedValue.isEmpty()) {
+                    if (!filter[2].isEmpty()) {
+                        filter[2] += QString(" OR type_msg = '%1'").arg(selectedValue);
+                        filterText[2] += " , "+ selectedValue;
+                    } else {
+                        filter[2] = QString("type_msg = '%1'").arg(selectedValue);
+                        filterText[2] = " Тип: " + selectedValue;
+                    }
+                }
+                dialog.accept();
+            });
 
+            connect(editButton, &QPushButton::clicked, [&]() {
+                QString selectedValue = comboBox.currentText();
+                if (!selectedValue.isEmpty()) {
+                    filter[2] = QString("type_msg = '%1'").arg(selectedValue);
+                    filterText[2] = " Тип: " + selectedValue;
+                }
+                dialog.accept();
+            });
+
+            connect(cancelButton, &QPushButton::clicked, &dialog, &QDialog::reject);
 
             if (dialog.exec() == QDialog::Accepted) {
-
-                QString selectedValue = comboBox.currentText();
-
-                filter[2] = QString("type_msg = '%1'").arg(selectedValue);
-
-                filterText[2] = " Тип: " + selectedValue;
-
                 model->setFilter(getFilterString());
-
                 model->select();
             }
         }
