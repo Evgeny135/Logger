@@ -29,14 +29,11 @@ public:
     MainWindow() {
         this->setMinimumSize(800, 600);
 
-        // Create the toolbar
         QToolBar *toolBar = addToolBar("Main Toolbar");
 
-        // Add actions to the toolbar
         QAction *selectDbAction = toolBar->addAction("Выбрать базу данных");
         QAction *saveDbAction = toolBar->addAction("Сохранить БД");
 
-        // Connect the actions to the slots
         connect(selectDbAction, &QAction::triggered, this, &MainWindow::selectDatabase);
         connect(saveDbAction, &QAction::triggered, this, &MainWindow::saveDatabase);
 
