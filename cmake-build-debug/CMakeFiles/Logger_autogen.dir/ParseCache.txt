@@ -327,6 +327,7 @@ C:/Users/trish/CLionProjects/Logger/MainWindow.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtSql/qsqltablemodel.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtSql/qtsql-config.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtSql/qtsqlglobal.h
+ mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QAction
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QApplication
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QComboBox
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QDateTimeEdit
@@ -337,8 +338,10 @@ C:/Users/trish/CLionProjects/Logger/MainWindow.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QLabel
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QLineEdit
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QMainWindow
+ mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QMessageBox
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QPushButton
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QTableView
+ mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QToolBar
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QVBoxLayout
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QWidget
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qabstractbutton.h
@@ -347,6 +350,8 @@ C:/Users/trish/CLionProjects/Logger/MainWindow.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qabstractscrollarea.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qabstractslider.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qabstractspinbox.h
+ mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qaction.h
+ mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qactiongroup.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qapplication.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qboxlayout.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qcombobox.h
@@ -363,6 +368,7 @@ C:/Users/trish/CLionProjects/Logger/MainWindow.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qlayoutitem.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qlineedit.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qmainwindow.h
+ mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qmessagebox.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qpushbutton.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qrubberband.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qsizepolicy.h
@@ -372,6 +378,7 @@ C:/Users/trish/CLionProjects/Logger/MainWindow.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qtabbar.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qtableview.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qtabwidget.h
+ mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qtoolbar.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qtwidgets-config.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qtwidgetsglobal.h
  mdp:D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qwidget.h

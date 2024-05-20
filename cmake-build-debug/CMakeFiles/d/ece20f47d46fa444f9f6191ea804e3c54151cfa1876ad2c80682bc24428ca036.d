@@ -353,6 +353,7 @@ Logger_autogen/timestamp: \
   D:/Qt55/5.15.1/mingw81_64/include/QtSql/qsqltablemodel.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtSql/qtsql-config.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtSql/qtsqlglobal.h \
+  D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QAction \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QApplication \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QComboBox \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QDateTimeEdit \
@@ -363,8 +364,10 @@ Logger_autogen/timestamp: \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QLabel \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QLineEdit \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QMainWindow \
+  D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QMessageBox \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QPushButton \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QTableView \
+  D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QToolBar \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QVBoxLayout \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/QWidget \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qabstractbutton.h \
@@ -373,6 +376,8 @@ Logger_autogen/timestamp: \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qabstractscrollarea.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qabstractslider.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qabstractspinbox.h \
+  D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qaction.h \
+  D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qactiongroup.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qapplication.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qboxlayout.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qcombobox.h \
@@ -389,6 +394,7 @@ Logger_autogen/timestamp: \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qlayoutitem.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qlineedit.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qmainwindow.h \
+  D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qmessagebox.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qpushbutton.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qrubberband.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qsizepolicy.h \
@@ -398,6 +404,7 @@ Logger_autogen/timestamp: \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qtabbar.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qtableview.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qtabwidget.h \
+  D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qtoolbar.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qtwidgets-config.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qtwidgetsglobal.h \
   D:/Qt55/5.15.1/mingw81_64/include/QtWidgets/qwidget.h \

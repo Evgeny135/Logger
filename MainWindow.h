@@ -28,15 +28,25 @@ Q_OBJECT
 public:
     MainWindow() {
         this->setMinimumSize(800, 600);
+
+        // Create the toolbar
+        QToolBar *toolBar = addToolBar("Main Toolbar");
+
+        // Add actions to the toolbar
+        QAction *selectDbAction = toolBar->addAction("Выбрать базу данных");
+        QAction *saveDbAction = toolBar->addAction("Сохранить БД");
+
+        // Connect the actions to the slots
+        connect(selectDbAction, &QAction::triggered, this, &MainWindow::selectDatabase);
+        connect(saveDbAction, &QAction::triggered, this, &MainWindow::saveDatabase);
+
         QWidget *centralWidget = new QWidget;
         QVBoxLayout *layout = new QVBoxLayout(centralWidget);
 
         QLabel *labelIdentifier = new QLabel("Текстовый идентификатор:");
-
         textIdentifier = new QLineEdit;
 
         QLabel *labelTypeMessage = new QLabel("Тип сообщения:");
-
         comboBox = new QComboBox;
         comboBox->addItem("Критическая");
         comboBox->addItem("Предупреждение");
@@ -46,7 +56,6 @@ public:
         comboBox->setEditable(true);
 
         QLabel *labelMessage = new QLabel("Сообщение:");
-
         message = new QLineEdit;
 
         QPushButton *button = new QPushButton("Добавить");
@@ -83,16 +92,31 @@ public:
         connect(buttonSave, &QPushButton::clicked, this, &MainWindow::buttonSave);
 
         textFilters = new QLabel;
-
         textFilters->setText("");
-
         layout->addWidget(textFilters);
 
         setCentralWidget(centralWidget);
-
     }
 
 private slots:
+
+    void selectDatabase() {
+        QString filePath = QFileDialog::getOpenFileName(this, tr("Выбрать базу данных"), "",
+                                                        tr("Database Files (*.db);;All Files (*)"));
+        if (!filePath.isEmpty()) {
+            Logger::setDatabaseName(filePath);
+            Logger::openDb();
+            model->select();
+        }
+    }
+
+    void saveDatabase() {
+        QString filePath = QFileDialog::getSaveFileName(this, tr("Сохранить базу данных"), "",
+                                                        tr("Database Files (*.db);;All Files (*)"));
+        if (!filePath.isEmpty()) {
+            Logger::saveDatabase(filePath,getFilterString());
+        }
+    }
 
     void refreshFilter() {
         Logger::openDb();
@@ -108,16 +132,17 @@ private slots:
     };
 
     void buttonClick() {
-
         Logger::addRecord(textIdentifier->text(), comboBox->currentText(), message->text());
         Logger::openDb();
         model->select();
     };
 
     void buttonSave() {
-        QString filePath = QFileDialog::getSaveFileName(this, tr("Сохранить файл"), "C:/Users/trish/Desktop/log.log", tr("Лог-файлы (*.log);;Все файлы (*)"));
+        QString filePath = QFileDialog::getSaveFileName(this, tr("Сохранить файл"), "C:/Users/trish/Desktop/log.log",
+                                                        tr("Лог-файлы (*.log);;Все файлы (*)"));
         if (!filePath.isEmpty()) {
-            Logger::getLogByDateWithFilters(filePath.toUtf8().constData(), (filter[0] + filter[1] + filter[2]).toUtf8().constData());
+            Logger::getLogByDateWithFilters(filePath.toUtf8().constData(),
+                                            (filter[0] + filter[1] + filter[2]).toUtf8().constData());
         }
     };
 
@@ -198,11 +223,11 @@ private slots:
                 if (!filter[1].isEmpty()) {
                     filter[1] += " OR " + filterString;
                     filterText[1] += " , " + startDate.toString("yyyy-MM-dd hh:mm:ss") + " " +
-                                    endDate.toString("yyyy-MM-dd hh:mm:ss");
+                                     endDate.toString("yyyy-MM-dd hh:mm:ss");
                 } else {
                     filter[1] = filterString;
                     filterText[1] = " Даты:  " + startDate.toString("yyyy-MM-dd hh:mm:ss") + " " +
-                                endDate.toString("yyyy-MM-dd hh:mm:ss");
+                                    endDate.toString("yyyy-MM-dd hh:mm:ss");
                 }
                 dialog.accept();
             });
@@ -250,7 +275,7 @@ private slots:
                 if (!selectedValue.isEmpty()) {
                     if (!filter[2].isEmpty()) {
                         filter[2] += QString(" OR type_msg = '%1'").arg(selectedValue);
-                        filterText[2] += " , "+ selectedValue;
+                        filterText[2] += " , " + selectedValue;
                     } else {
                         filter[2] = QString("type_msg = '%1'").arg(selectedValue);
                         filterText[2] = " Тип: " + selectedValue;
@@ -300,6 +325,5 @@ private:
         return composedFilter;
     };
 };
-
 
 #endif //LOGGER_MAINWINDOW_H

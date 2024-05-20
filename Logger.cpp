@@ -13,6 +13,10 @@ void Logger::openDb() {
     }
 }
 
+void Logger::setDatabaseName(QString path) {
+    Logger::db.setDatabaseName(path);
+}
+
 void Logger::init(QString path) {
     Logger::db = QSqlDatabase::addDatabase("QSQLITE");
     Logger::db.setDatabaseName(path);
@@ -32,7 +36,7 @@ void Logger::init(QString path) {
     qInstallMessageHandler(Logger::customMessageHandler);
 }
 
-void Logger::setPath(QString path){
+void Logger::setPath(QString path) {
     Logger::db.setDatabaseName(path);
     if (!Logger::db.open()) {
         qDebug() << "Open Error";
@@ -46,6 +50,56 @@ void Logger::setPath(QString path){
     }
 
     Logger::db.close();
+}
+
+void Logger::saveDatabase(QString path, QString filters) {
+    QSqlDatabase dbSave = QSqlDatabase::addDatabase("QSQLITE", "temp");
+    dbSave.setDatabaseName(path);
+
+    if (!dbSave.open()) {
+        qDebug() << "Error";
+        return;
+    }
+
+    QSqlQuery createTable(dbSave);
+    if (!createTable.exec(
+            "CREATE TABLE IF NOT EXISTS Log (id INTEGER PRIMARY KEY AUTOINCREMENT, text_id TEXT, date_time TEXT, type_msg TEXT, msg TEXT)")) {
+        qDebug() << "Error";
+        return;
+    }
+
+    if (!Logger::db.open()) {
+        qDebug() << "Error";
+        return;
+    }
+
+    QSqlQuery getDataOldDb(Logger::db);
+    if (!getDataOldDb.exec("SELECT text_id, date_time, type_msg, msg FROM Log WHERE " + filters)) {
+        qDebug() << "Error";
+        return;
+    }
+
+    QSqlQuery saveNewData(dbSave);
+    while (getDataOldDb.next()) {
+        QString text_id = getDataOldDb.value(0).toString();
+        QString date_time = getDataOldDb.value(1).toString();
+        QString type_msg = getDataOldDb.value(2).toString();
+        QString msg = getDataOldDb.value(3).toString();
+
+        QString strInsert = QString(
+                "INSERT INTO Log (text_id, date_time, type_msg, msg) VALUES (:text_id, :date_time, :type_msg, :msg)");
+        saveNewData.prepare(strInsert);
+        saveNewData.bindValue(":text_id", text_id);
+        saveNewData.bindValue(":date_time", date_time);
+        saveNewData.bindValue(":type_msg", type_msg);
+        saveNewData.bindValue(":msg", msg);
+
+        if (!saveNewData.exec()) {
+            qDebug() << "Error";
+            return;
+        }
+    }
+
 }
 
 void Logger::customMessageHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg) {
@@ -157,6 +211,7 @@ void Logger::getLogByDate(QString path, QDateTime firstDate, QDateTime secondDat
     Logger::db.close();
 }
 
+
 void Logger::getLogByDateWithFilters(QString path, QString filters) {
     if (!Logger::db.open()) {
         qDebug() << "Open Error";
@@ -176,7 +231,7 @@ void Logger::getLogByDateWithFilters(QString path, QString filters) {
         strInsert = "SELECT text_id, date_time,type_msg,msg\n"
                     "FROM Log\n"
                     "WHERE " + filters + " ;";
-    }else{
+    } else {
         strInsert = "SELECT text_id, date_time,type_msg,msg\n"
                     "FROM Log\n";
     }
